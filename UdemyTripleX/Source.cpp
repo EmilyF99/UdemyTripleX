@@ -3,21 +3,45 @@
 #include "CodeGenerator.h"
 #include "PlayerInput.h"
 #include "Comparison.h"
+#include <iostream>
 
+bool IsLevelComplete = false;
+
+void LevelOne()
+{
+    Text::Intro();
+    Result CodeResult = CodeGenerator::CodeSetUp();
+    Result PlayerGuess;
+    bool IsCodeCorrect = false;
+
+    do
+    {
+        PlayerGuess = PlayerInput::InputCode();
+        IsCodeCorrect = Comparison::CompareResults(CodeResult, PlayerGuess);
+        
+        if (!IsCodeCorrect)
+        {
+            Text::CodeOneIncorrect();
+        }
+    } while (!IsCodeCorrect);
+    
+    Text::CodeOneCorrect();
+    IsLevelComplete = true;
+}
+
+void LevelTwo()
+{
+
+}
 int main()
 {
-	Text::Intro();
-
-    Result codeResult = CodeGenerator::CodeSetUp();
-    Result playerGuess = PlayerInput::InputCode();
-
-    if (Comparison::CompareResults(codeResult, playerGuess)) 
+    LevelOne();
+    if (IsLevelComplete)
     {
-        Text::CodeOneCorrect();
+        std::cin.clear();
+        std::cin.ignore();
+        LevelTwo();
     }
-    else 
-    {
-        Text::CodeOneIncorrect();
-    }
+   
 	return 0;
 }

@@ -17,5 +17,5 @@ void Text::CodeOneCorrect()
 void Text::CodeOneIncorrect()
 {
 	std::cout << "\nYou enter the code and give the door a shove, The door rattles but doesn\'t budge, you rebound off the door and land on the wet ground."
-		<< "\nOuch, your shoulder now aches and the door remains looming over you.";
+		<< "\nOuch, your shoulder now aches and the door remains looming over you." << "\nYou decide to give the door another go. Enter your three numbers...";
 }
