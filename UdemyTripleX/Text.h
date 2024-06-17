@@ -3,8 +3,7 @@
 class Text {
 public:
 	static void Intro();
-private:
-	
-protected:
-	
+	static void CodeOneCorrect();
+	static void CodeOneIncorrect();
+
 };
