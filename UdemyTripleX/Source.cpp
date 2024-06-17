@@ -5,12 +5,14 @@
 #include "Comparison.h"
 #include <iostream>
 
-bool IsLevelComplete = false;
+bool IsLevel1Complete = false;
+bool IsLevel2Complete = false;
+int GameDifficulty = 1;
 
 void LevelOne()
 {
     Text::Intro();
-    Result CodeResult = CodeGenerator::CodeSetUp();
+    Result CodeResult = CodeGenerator::CodeSetUp(GameDifficulty);
     Result PlayerGuess;
     bool IsCodeCorrect = false;
 
@@ -26,20 +28,39 @@ void LevelOne()
     } while (!IsCodeCorrect);
     
     Text::CodeOneCorrect();
-    IsLevelComplete = true;
+    IsLevel1Complete = true;
 }
 
 void LevelTwo()
 {
+    Text::Entrance();
+    Result CodeResult = CodeGenerator::CodeSetUp(GameDifficulty);
+    Result PlayerGuess;
+    bool IsCodeCorrect = false;
 
+    do
+    {
+        PlayerGuess = PlayerInput::InputCode();
+        IsCodeCorrect = Comparison::CompareResults(CodeResult, PlayerGuess);
+
+        if (!IsCodeCorrect)
+        {
+            Text::CodeTwoIncorrect();
+        }
+    } while (!IsCodeCorrect);
+
+    Text::CodeTwoCorrect();
+    IsLevel2Complete = true;
 }
 int main()
 {
+    srand(time(NULL));
     LevelOne();
-    if (IsLevelComplete)
+    if (IsLevel1Complete)
     {
         std::cin.clear();
         std::cin.ignore();
+        GameDifficulty++;
         LevelTwo();
     }
    
